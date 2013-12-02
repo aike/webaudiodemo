@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+	<script type="text/javascript">
+		//  This program is licensed under the MIT License.
+		//  Copyright 2013, aike (@aike1000)
+		window.AudioContext = window.AudioContext || window.webkitAudioContext;
+		function play() {
+			var ctx = new AudioContext();
+ 			var osc = ctx.createOscillator();
+ 			osc.type = 1;
+ 			var vol = ctx.createGain();
+ 			vol.gain.value = 0.2;
+			osc.connect(vol);
+			vol.connect(ctx.destination)
+    		osc.start(0);
+    		osc.stop(7);
+    	}
+	</script>
+	<div><img src="ss.png"></div>
+	<div style="position:absolute;left: 10px;top:550px;"><a href="../osc1/">prev</a></div>
+	<div style="position:absolute;left:320px;top:550px;"><button id="play" onclick="play();">Play</button></div>
+	<div style="position:absolute;left:690px;top:550px;"><a href="../kachatan/">next</a></div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+<div><img src="ss.png"></div>
+<textarea cols="58" rows="3" style="font-size:20px;"></textarea>
+<div style="position:absolute;left: 10px;top:640px;"><a href="../osc2/">prev</a></div>
+<div style="position:absolute;left:690px;top:640px;"><a href="../delay1/">next</a></div>
+
+<script type="text/javascript">
+//  This program is licensed under the MIT License.
+//  Copyright 2013, aike (@aike1000)
+
+var loadwav = function(file, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", file, true);
+    xhr.responseType = "arraybuffer";
+    xhr.onload = function() {
+        ctx.decodeAudioData(xhr.response,function(buf){
+            callback(buf);
+        }, function(){});
+    };
+    xhr.send();
+}
+
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+var ctx = new AudioContext();
+var kacha, tan;
+loadwav('kacha.wav', function(buf) { kacha = buf; });
+loadwav('tan.wav', function(buf) { tan = buf; });
+
+window.document.onkeyup = function(evt){
+    var src = ctx.createBufferSource();
+    if (evt.keyCode == 13)  // return key
+        src.buffer = tan;
+    else
+        src.buffer = kacha;
+    src.connect(ctx.destination);
+    src.start(0);
+
+    return false;
+}
+
+</script>
+</body>
+</html>
