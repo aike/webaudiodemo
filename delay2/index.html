@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <head>
+	<!-- highlight.js -->
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/obsidian.min.css">
+	<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+
 	<script type="text/javascript" src="js/dsp.js"></script>
 </head>
 <body>
-	<div><img src="ss.png"></div>
-	<div style="position:absolute;left: 10px;top:550px;"><a href="../delay1/">prev</a></div>
-	<div style="position:absolute;left:690px;top:550px;"><a href="../reverb/">next</a></div>
+	<a href="../delay1/">◀︎</a>
+	<a href="../">▲︎</a>
+	<a href="../reverb/">▶︎︎</a>
+
+	<h1>Feedback Delay</h1>
+	<pre>
+	<code class="javascript">var mic = ctx.createMediaStreamSource(stream);
+mic.connect(delay);
+mic.connect(ctx.destination);
+delay.connect(feedback);
+feedback.connect(delay);
+feedback.connect(ctx.destination);	</code>
+	</pre>
+	<div class="center"><img src="delay2.png"></div>
+
 </body>
 </html>

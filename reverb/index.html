@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <head>
+	<!-- highlight.js -->
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/obsidian.min.css">
+	<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+
 	<script type="text/javascript" src="js/dsp.js"></script>
 </head>
 <body>
-	<div><img src="ss.png"></div>
-	<div style="position:absolute;left: 10px;top:550px;"><a href="../delay2/">prev</a></div>
-	<div style="position:absolute;left:690px;top:550px;"><a href="../fuzz/">next</a></div>
+	<a href="../delay2/">◀︎</a>
+	<a href="../">▲︎</a>
+	<a href="../fuzz/">▶︎︎</a>
+
+	<h1>Convolver</h1>
+	<pre>
+	<code class="javascript">
+var convolver = ctx.createConvolver();
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "ir.wav", true);
+xhr.responseType = "arraybuffer";
+xhr.onload = function() {
+    ctx.decodeAudioData(xhr.response,function(buf){
+        convolver.buffer = buf;
+    }, function(){});
+};
+xhr.send();
+	</code>
+	</pre>
 </body>
 </html>

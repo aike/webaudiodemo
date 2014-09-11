@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <head>
+	<!-- highlight.js -->
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/obsidian.min.css">
+	<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+
 	<script type="text/javascript" src="js/synth.js"></script>
 </head>
 <body>
-	<div><img src="ss.png"></div>
-	<div style="position:absolute;left: 10px;top:550px;"><a href="../seq5/">prev</a></div>
-	<div style="position:absolute;left:320px;top:550px;"><button id="play" onclick="play();">Play</button></div>
-	<div style="position:absolute;left:690px;top:550px;"><a href="../seq7/">next</a></div>
+	<a href="../seq5/">◀︎</a>
+	<a href="../">▲︎</a>
+	<a href="../seq7/">▶︎︎</a>
+
+	<h1 style="font-size:30px;">Simple Sequencer App<br>Synth + delay + detune + filter + LFO</h1>
+	<pre>
+	<code class="javascript">	this.lpf = ctx.createBiquadFilter();
+	this.lpf.type = "lowpass";
+	this.lpf.Q.value = 20;
+	this.lpf.frequency.value = 4000;
+	this.angle = 0.0;
+	var self = this;
+	this.lfo = function() {
+		self.angle += 0.1;
+		if (self.angle > 2 * Math.PI)
+			self.angle -= 2 * Math.PI;
+		self.lpf.frequency.value = 4000 + Math.sin(self.angle) * 3000;
+	}
+	setInterval(this.lfo, 100);</code>
+	</pre>
+
+	<div class="center"><button id="play" onclick="play();">Play</button></div>
 </body>
 </html>

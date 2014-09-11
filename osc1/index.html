@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head></head>
+<head>
+	<!-- highlight.js -->
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/obsidian.min.css">
+	<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
 <body>
+	<a href="../">▲︎</a>
+	<a href="../osc2/">▶︎︎</a>
+
 	<script type="text/javascript">
 		//  This program is licensed under the MIT License.
 		//  Copyright 2013, aike (@aike1000)
@@ -9,14 +18,22 @@
 		function play() {
 			var ctx = new AudioContext();
  			var osc = ctx.createOscillator();
- 			osc.type = 1;
+ 			osc.type = "square";
 			osc.connect(ctx.destination);
     		osc.start(0);
     		osc.stop(7);
     	}
 	</script>
-	<div><img src="ss.png"></div>
-	<div style="position:absolute;left:320px;top:550px;"><button id="play" onclick="play();">Play</button></div>
-	<div style="position:absolute;left:690px;top:550px;"><a href="../osc2/">next</a></div>
+	<h1>Simple Oscillator</h1>
+	<pre>
+	<code class="javascript">
+	var ctx = new AudioContext();
+	var osc = ctx.createOscillator();
+	osc.type = "square";
+	osc.connect(ctx.destination);
+	osc.start(0);
+	</code>
+	</pre>
+	<div class="center"><button id="play" onclick="play();">Play</button></div>
 </body>
 </html>

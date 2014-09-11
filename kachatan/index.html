@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head></head>
+<head>
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/obsidian.min.css">
+    <script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
 <body>
+    <a href="../osc2/">◀︎</a>
+    <a href="../">▲︎</a>
+    <a href="../delay1/">▶︎︎</a>
 
-<div><img src="ss.png"></div>
-<textarea cols="58" rows="3" style="font-size:20px;"></textarea>
-<div style="position:absolute;left: 10px;top:640px;"><a href="../osc2/">prev</a></div>
-<div style="position:absolute;left:690px;top:640px;"><a href="../delay1/">next</a></div>
+    <h1 style="font-size: 35px;">Buffer Source (playback wav file)</h1>
+    <pre style="margin-bottom:0px;">
+    <code class="javascript" style="padding-bottom:10px;">window.document.onkeyup = function(evt){
+    var src = ctx.createBufferSource();
+    if (evt.keyCode == 13)
+        src.buffer = tan;       // return key
+    else
+        src.buffer = kacha;     // the other keys
+    src.connect(ctx.destination);
+    src.start(0);
+    return false;
+}    </code>
+    </pre>
+
+<div class="center"><textarea cols="58" rows="3" style="font-size:20px;width:80%;"></textarea></div>
 
 <script type="text/javascript">
 //  This program is licensed under the MIT License.

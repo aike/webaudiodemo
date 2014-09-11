@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <head>
+	<!-- highlight.js -->
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/obsidian.min.css">
+	<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+
 	<script type="text/javascript" src="js/synth.js"></script>
 </head>
 <body>
-	<div><img src="ss.png"></div>
-	<div style="position:absolute;left: 10px;top:550px;"><a href="../seq3/">prev</a></div>
-	<div style="position:absolute;left:320px;top:550px;"><button id="play" onclick="play();">Play</button></div>
-	<div style="position:absolute;left:690px;top:550px;"><a href="../seq5/">next</a></div>
+	<a href="../seq3/">◀︎</a>
+	<a href="../">▲︎</a>
+	<a href="../seq5/">▶︎︎</a>
+
+	<h1 style="font-size:30px;">Simple Sequencer App<br>Synth + delay</h1>
+	<pre>
+	<code class="javascript">this.delay = ctx.createDelay();
+this.delay.delayTime.value = 0.2;
+this.feedback = ctx.createGain();
+this.feedback.gain.value = 0.3;
+
+this.vol.connect(this.delay);
+this.vol.connect(ctx.destination);
+this.delay.connect(this.feedback);
+this.feedback.connect(this.delay);
+this.feedback.connect(ctx.destination);	</code>
+	</pre>
+
+	<div class="center"><button id="play" onclick="play();">Play</button></div>
+
 </body>
 </html>

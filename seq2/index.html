@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <head>
+	<!-- highlight.js -->
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/obsidian.min.css">
+	<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+
 	<script type="text/javascript" src="js/bass.js"></script>
 </head>
 <body>
-	<div><img src="ss.png"></div>
-	<div style="position:absolute;left: 10px;top:550px;"><a href="../seq1/">prev</a></div>
-	<div style="position:absolute;left:320px;top:550px;"><button id="play" onclick="play();">Play</button></div>
-	<div style="position:absolute;left:690px;top:550px;"><a href="../seq3/">next</a></div>
+	<a href="../seq1/">◀︎</a>
+	<a href="../">▲︎</a>
+	<a href="../seq3/">▶︎︎</a>
+
+	<h1 style="font-size:30px;">Simple Sequencer App<br>Bass</h1>
+	<pre>
+	<code class="javascript">	this.seq = [33, 33, 40, 33, 33, 40, 33, 33,
+			    33, 33, 40, 33, 33, 40, 33, 33,
+			    31, 31, 31, 38, 38, 31, 31, 38,	
+			    29, 29, 36, 29, 36, 29, 29, 29];
+}
+
+Bass.prototype.play = function(n, tim) {
+	var osc = ctx.createOscillator();
+	osc.type = "sawtooth";
+	osc.frequency.value
+		= 440.0 * Math.pow(2.0, (this.seq[n % 32] - 69.0) / 12.0);
+	osc.connect(this.vol);
+	osc.start(tim);
+	osc.stop(tim + 0.08);	
+}	</code>
+	</pre>
+	<div class="center"><button id="play" onclick="play();">Play</button></div>
 </body>
 </html>

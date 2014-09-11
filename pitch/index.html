@@ -1,12 +1,58 @@
 <!DOCTYPE html>
 <head>
+	<!-- highlight.js -->
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/obsidian.min.css">
+	<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+
 	<script type="text/javascript" src="js/dsp.js"></script>
 	<script type="text/javascript" src="js/pitchshifter.js"></script>
 </head>
 <body>
-	<div><img src="ss.png"></div>
-	<div style="position:absolute;left: 10px;top:550px;"><a href="../fuzz/">prev</a></div>
-	<div style="position:absolute;left:320px;top:550px;"><button id="toggle" onclick="toggle();">High/Low</button></div>
-	<div style="position:absolute;left:690px;top:550px;"><a href="../seq1/">next</a></div>
+	<a href="../fuzz/">◀︎</a>
+	<a href="../">▲︎</a>
+	<a href="../seq1/">▶︎︎</a>
+
+	<h1>Pitch Changer</h1>
+
+	<div id="container">
+	<pre style="float:left;width:47%;margin-left:20px;">
+	<code class="javascript" style="font-size:13px;">var pshift = function(val, indata) {
+    this.fft.forward(indata);
+    for (var i = 0; i < stream_length; i++) {
+        a_real[i] = 0;
+        a_imag[i] = 0;
+    }
+    for (var i = 0; i < stream_length; i++) {
+        var index = parseInt(i * val);
+        var eq = 1.0;
+        if (i > stream_length / 2) {
+            eq = 0;
+        }
+        if ((index >= 0) && (index < stream_length)) {
+            a_real[index] += fft.real[i] * eq;
+            a_imag[index] += fft.imag[i] * eq;
+        } 
+    }
+    return this.fft.inverse(this.a_real, this.a_imag);
+}</code>
+</pre>
+
+	<pre style="float:right;width:47%;margin-right:20px;">
+	<code class="javascript" style="font-size:13px;">pitchShifter.onaudioprocess = function(event) {
+    var sin
+    	= event.inputBuffer.getChannelData(0);
+    var sout
+    	= event.outputBuffer.getChannelData(0);
+    var data = pshift(rate, sin);
+    for (var i = 0; i < sin.length; i++) {
+        sout[i] = data[i];
+    }
+};</code>
+</pre>
+	</div>
+
+	<div class="center" style="clear:both;"><button id="toggle" onclick="toggle();">High/Low</button></div>
 </body>
 </html>

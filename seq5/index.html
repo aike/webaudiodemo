@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <head>
+	<!-- highlight.js -->
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/obsidian.min.css">
+	<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+
 	<script type="text/javascript" src="js/synth.js"></script>
 </head>
 <body>
-	<div><img src="ss.png"></div>
-	<div style="position:absolute;left: 10px;top:550px;"><a href="../seq4/">prev</a></div>
-	<div style="position:absolute;left:320px;top:550px;"><button id="play" onclick="play();">Play</button></div>
-	<div style="position:absolute;left:690px;top:550px;"><a href="../seq6/">next</a></div>
+	<a href="../seq4/">◀︎</a>
+	<a href="../">▲︎</a>
+	<a href="../seq6/">▶︎︎</a>
+
+	<h1 style="font-size:30px;">Simple Sequencer App<br>Synth + delay + detune</h1>
+	<pre>
+	<code class="javascript">Synth.prototype.play = function(n, tim) {
+	for (i = 0; i < 3; i++) {	// 3 Oscillators
+		var osc = ctx.createOscillator();
+		osc.type = "sawtooth";
+		var detune = 3 * i;		// detune 3Hz each oscillators
+		osc.frequency.value
+			= 440.0 * Math.pow(2.0, (this.seq[n % 8] - 69.0) / 12.0)
+			+ detune;
+		osc.connect(this.vol);
+		osc.start(tim);
+		osc.stop(tim + 0.10);
+	}
+}</code>
+	</pre>
+
+	<div class="center"><button id="play" onclick="play();">Play</button></div>
 </body>
 </html>

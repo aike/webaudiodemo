@@ -22,7 +22,7 @@ var Synth = function(ctx) {
 Synth.prototype.play = function(n, tim) {
 	for (i = 0; i < 3; i++) {	// 3 Oscillators
 		var osc = ctx.createOscillator();
-		osc.type = 2;
+		osc.type = "sawtooth";
 		var detune = 3 * i;		// 3Hz周波数をずらす
 		osc.frequency.value = 440.0 * Math.pow(2.0, (this.seq[n % 8] - 69.0) / 12.0) + detune;
 		osc.connect(this.vol);

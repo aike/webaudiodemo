@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head></head>
+<head>
+	<!-- highlight.js -->
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/obsidian.min.css">
+	<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
 <body>
+	<a href="../osc1/">◀︎</a>
+	<a href="../">▲︎</a>
+	<a href="../kachatan/">▶︎︎</a>
+
 	<script type="text/javascript">
 		//  This program is licensed under the MIT License.
 		//  Copyright 2013, aike (@aike1000)
@@ -9,7 +19,7 @@
 		function play() {
 			var ctx = new AudioContext();
  			var osc = ctx.createOscillator();
- 			osc.type = 1;
+ 			osc.type = "square";
  			var vol = ctx.createGain();
  			vol.gain.value = 0.2;
 			osc.connect(vol);
@@ -18,9 +28,19 @@
     		osc.stop(7);
     	}
 	</script>
-	<div><img src="ss.png"></div>
-	<div style="position:absolute;left: 10px;top:550px;"><a href="../osc1/">prev</a></div>
-	<div style="position:absolute;left:320px;top:550px;"><button id="play" onclick="play();">Play</button></div>
-	<div style="position:absolute;left:690px;top:550px;"><a href="../kachatan/">next</a></div>
+	<h1>Oscillator + Gain</h1>
+	<pre>
+	<code class="javascript">
+	var ctx = new AudioContext();
+	var osc = ctx.createOscillator();
+	osc.type = "square";
+	var vol = ctx.createGain();
+	vol.gain.value = 0.2; // 0.0 〜 1.0
+	osc.connect(vol);
+	vol.connect(ctx.destination)
+	osc.start(0);
+	</code>
+	</pre>
+	<div class="center"><button id="play" onclick="play();">Play</button></div>
 </body>
 </html>

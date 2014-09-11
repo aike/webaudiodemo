@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <head>
+	<!-- highlight.js -->
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/obsidian.min.css">
+	<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+
 	<script type="text/javascript" src="js/dsp.js"></script>
 </head>
 <body>
-	<div><img src="ss.png"></div>
-	<div style="position:absolute;left: 10px;top:550px;"><a href="../reverb/">prev</a></div>
-	<div style="position:absolute;left:690px;top:550px;"><a href="../pitch/">next</a></div>
+	<a href="../reverb/">◀︎</a>
+	<a href="../">▲︎</a>
+	<a href="../pitch/">▶︎︎</a>
+
+	<h1>Distortion</h1>
+	<pre>
+	<code class="javascript">var fuzz = ctx.createScriptProcessor(1024, 1, 1);
+fuzz.onaudioprocess = function(event) {
+    var sin = event.inputBuffer.getChannelData(0);
+    var sout = event.outputBuffer.getChannelData(0);
+    var limit = 0.2;
+    for (var i = 0; i < sin.length; i++) {
+        var sig = sin[i] * 6;           // Boost
+        if (sig >  limit) sig =  limit; // Clip
+        if (sig < -limit) sig = -limit; // Clip
+        sout[i] = sig;
+    }
+};	</code>
+	</pre>
+	<img src="img_dist.png" style="position:absolute;top:230px;right:65px;width:170px;height:170px;">
 </body>
 </html>

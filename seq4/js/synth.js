@@ -23,7 +23,7 @@ var Synth = function(ctx) {
 
 Synth.prototype.play = function(n, tim) {
 	var osc = ctx.createOscillator();
-	osc.type = 2;
+	osc.type = "sawtooth";
 	osc.frequency.value = 440.0 * Math.pow(2.0, (this.seq[n % 8] - 69.0) / 12.0);
 	osc.connect(this.vol);
 	osc.start(tim);

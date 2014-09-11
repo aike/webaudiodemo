@@ -7,7 +7,7 @@ var Bass = function(ctx) {
 	this.vol.gain.value = 0.3;
 
 	this.lpf = ctx.createBiquadFilter();
-	this.lpf.type = 0; // LPF
+	this.lpf.type = "lowpass"; // LPF
 	this.lpf.Q.value = 5;
 	this.lpf.frequency.value = 1500;
 
@@ -24,7 +24,7 @@ var Bass = function(ctx) {
 
 Bass.prototype.play = function(n, tim) {
 	var osc = ctx.createOscillator();
-	osc.type = 2;
+	osc.type = "sawtooth";
 	osc.frequency.value = 440.0 * Math.pow(2.0, (this.seq[n % 32] - 69.0) / 12.0);
 	osc.connect(this.vol);
 	osc.start(tim);

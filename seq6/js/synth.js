@@ -12,7 +12,7 @@ var Synth = function(ctx) {
 
 	///// LFOで周期的に変化するフィルター追加
 	this.lpf = ctx.createBiquadFilter();
-	this.lpf.type = 0; // LPF
+	this.lpf.type = "lowpass";
 	this.lpf.Q.value = 20;
 	this.lpf.frequency.value = 4000;
 	this.angle = 0.0;
@@ -39,7 +39,7 @@ var Synth = function(ctx) {
 Synth.prototype.play = function(n, tim) {
 	for (j = 0; j < 3; j++) {
 		var osc = ctx.createOscillator();
-		osc.type = 2;
+		osc.type = "sawtooth";
 		var detune = 3 * j;
 		osc.frequency.value = 440.0 * Math.pow(2.0, (this.seq[n % 8] - 69.0) / 12.0) + detune;
 		osc.connect(this.vol);

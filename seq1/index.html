@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <head>
+<head>
+	<!-- highlight.js -->
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/obsidian.min.css">
+	<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+
 	<script type="text/javascript" src="js/drum.js"></script>
 </head>
 <body>
-	<div><img src="ss.png"></div>
-	<div style="position:absolute;left: 10px;top:550px;"><a href="../pitch/">prev</a></div>
-	<div style="position:absolute;left:320px;top:550px;"><button id="play" onclick="play();">Play</button></div>
-	<div style="position:absolute;left:690px;top:550px;"><a href="../seq2/">next</a></div>
+	<a href="../pitch/">◀︎</a>
+	<a href="../">▲︎</a>
+	<a href="../seq2/">▶︎︎</a>
+
+	<h1 style="font-size:30px;">Simple Sequencer App<br>Drum</h1>
+	<pre>
+	<code class="javascript">Drum.prototype.play = function(n, tim) {
+    if (n % 4 == 0) {
+        var src = ctx.createBufferSource();
+        src.buffer = this.kick;             // play Kick sound
+        src.connect(this.vol);
+        src.start(tim);
+    }
+    if (n % 4 == 2) {
+        var src = ctx.createBufferSource();
+        src.buffer = this.hat;              // play Hat sound
+        src.connect(this.vol);
+        src.start(tim);
+    }
+}	</code>
+	</pre>
+
+	<div class="center"><button id="play" onclick="play();">Play</button></div>
 </body>
 </html>
